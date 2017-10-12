@@ -103,7 +103,7 @@ def parse_depthstr(depths):
     depth = {}
     for item in items:
         try:
-            indv, minmax = item.split('=')9,
+            indv, minmax = item.split('='),
             mincov, maxcov = minmax.split('-')
             depth[indv] = (int(mincov), int(maxcov))
         except:
