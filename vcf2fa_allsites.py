@@ -43,14 +43,12 @@ def parse_args():
         "Output VCF format",\
         action="store_true",\
         required=False)
-        
-    fa_opts = out_opts.add_argument_group()
-    fa_opts.add_argument("--fai", "-f", help=\
-        "The path to the FAI file for the reference genome",
-        type=parse_fai)
-    fa_opts.add_argument("--output_prefix", "-o", help=\
+    out_pts.add_argument("--output_prefix", "-o", help=\
         "The prefix of files to create (will be followed by sample name_hapX.fa)")
     
+    parser.add_argument("--fai", "-f", help=\
+        "The path to the FAI file for the reference genome",
+        type=parse_fai)
     parser.add_argument("--vq", "-v", help=\
         "Minimum variant quality to allow through filter.",
         type=float,
@@ -88,10 +86,10 @@ def parse_args():
     if not parsed.recode:
         # Make sure both pieces of information needed are present for writing
         # FASTA files.
-        if options.output_prefix is None:
+        if parsed.output_prefix is None:
             print("ERROR: you must provide an output prefix for writing FASTA files.", file=sys.stderr)
             exit(1)
-        if options.fai is None:
+        if parsed.fai is None:
             print("ERROR: you must provide the path to an index (.fai) of the reference FASTA file in order to output FASTA files.", file=sys.stderr)
             exit(1)
     return parsed
